@@ -1,11 +1,18 @@
-# sema.vim
+<div align="center">
 
-Vim and Neovim support for [Sema](https://sema-lang.com) — a Lisp with first-class LLM primitives. Provides syntax highlighting, filetype detection, and Lisp-aware editor settings for `.sema` files.
+<img src="https://sema-lang.com/logo.svg" alt="Sema" height="64">
 
-- **Homepage**: [sema-lang.com](https://sema-lang.com)
-- **Playground**: [sema.run](https://sema.run)
-- **Source**: [github.com/sema-lisp/sema.vim](https://github.com/sema-lisp/sema.vim)
-- **Author**: Helge Sverre
+# Sema for Vim
+
+**[Sema](https://sema-lang.com) support for [Vim](https://www.vim.org)** — a Lisp with first-class LLM primitives.
+
+[![CI](https://img.shields.io/github/actions/workflow/status/sema-lisp/sema.vim/ci.yml?branch=main&label=CI&logo=github)](https://github.com/sema-lisp/sema.vim/actions)
+[![License](https://img.shields.io/github/license/sema-lisp/sema.vim?color=c8a855)](LICENSE)
+[![Website](https://img.shields.io/badge/website-sema--lang.com-c8a855)](https://sema-lang.com)
+
+</div>
+
+Vim and Neovim support for Sema: syntax highlighting, filetype detection, and Lisp-aware editor settings for `.sema` files.
 
 ## Features
 
@@ -125,6 +132,14 @@ The Sema LSP server also emits a custom `sema/evalResult` notification for inlin
 
 Override any group in your colorscheme to customise appearance.
 
+## Links
+
+- **Website** — [sema-lang.com](https://sema-lang.com)
+- **Playground** — [sema.run](https://sema.run)
+- **Documentation** — [sema-lang.com/docs](https://sema-lang.com/docs/)
+- **Grammar** — [tree-sitter-sema](https://github.com/sema-lisp/tree-sitter-sema)
+- **Repository** — [sema-lisp/sema.vim](https://github.com/sema-lisp/sema.vim)
+
 ## License
 
-MIT
+[MIT](LICENSE) © [Helge Sverre](https://github.com/HelgeSverre)
