@@ -3,7 +3,7 @@
 Syntax highlighting, filetype detection, and editor settings for [Sema](https://sema-lang.com) (`.sema` files).
 
 - **Homepage**: [sema-lang.com](https://sema-lang.com)
-- **Source**: [github.com/HelgeSverre/sema](https://github.com/HelgeSverre/sema)
+- **Source**: [github.com/sema-lisp/sema.vim](https://github.com/sema-lisp/sema.vim)
 - **Author**: Helge Sverre
 
 ## Features
@@ -18,14 +18,14 @@ Syntax highlighting, filetype detection, and editor settings for [Sema](https://
 ### vim-plug
 
 ```vim
-Plug 'HelgeSverre/sema', { 'rtp': 'editors/vim' }
+Plug 'sema-lisp/sema.vim', { 'rtp': 'editors/vim' }
 ```
 
 ### lazy.nvim
 
 ```lua
 {
-  "HelgeSverre/sema",
+  "sema-lisp/sema.vim",
   config = function(plugin)
     vim.opt.rtp:append(plugin.dir .. "/editors/vim")
   end,
@@ -36,7 +36,7 @@ Plug 'HelgeSverre/sema', { 'rtp': 'editors/vim' }
 
 ```bash
 cd ~/.vim/bundle
-git clone https://github.com/HelgeSverre/sema.git
+git clone https://github.com/sema-lisp/sema.vim.git
 # Then add to your vimrc:
 # set runtimepath+=~/.vim/bundle/sema/editors/vim
 ```
