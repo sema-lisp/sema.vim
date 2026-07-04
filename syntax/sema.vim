@@ -2,6 +2,8 @@ if exists('b:current_syntax')
   finish
 endif
 
+scriptencoding utf-8
+
 setlocal iskeyword+=!,?,/,-,>,*,<,#
 
 " ---------- Parens / Brackets -------------------------------------------

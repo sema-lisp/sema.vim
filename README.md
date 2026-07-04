@@ -1,113 +1,72 @@
-# Sema for Vim / Neovim
+# sema.vim
 
-Syntax highlighting, filetype detection, and editor settings for [Sema](https://sema-lang.com) (`.sema` files).
+Vim and Neovim support for [Sema](https://sema-lang.com) — a Lisp with first-class LLM primitives. Provides syntax highlighting, filetype detection, and Lisp-aware editor settings for `.sema` files.
 
 - **Homepage**: [sema-lang.com](https://sema-lang.com)
+- **Playground**: [sema.run](https://sema.run)
 - **Source**: [github.com/sema-lisp/sema.vim](https://github.com/sema-lisp/sema.vim)
 - **Author**: Helge Sverre
 
 ## Features
 
-- Full syntax highlighting (special forms, builtins, LLM primitives, keywords, strings, numbers, comments)
-- Automatic filetype detection for `.sema` files
-- Lisp-aware indentation with correct `lispwords`
-- Comment string configured for `;`
+- **Filetype detection** — `.sema` files are automatically detected as `sema`.
+- **Syntax highlighting** — special forms, builtins (including LLM/agent primitives like `llm/chat`, `agent/run`, `defagent`, `deftool`), threading macros (`->`, `->>`, `as->`), keyword literals, strings with escapes, numbers, booleans, character literals, quoting/unquoting, line (`;`) and block (`#| … |#`) comments, and definition-name highlighting.
+- **Lisp-aware editing** — `lisp` mode with a curated `lispwords` list (including Sema forms such as `defagent`, `deftool`, `with-budget`), 2-space indentation, and `iskeyword` extended for Sema identifiers (`!?/-<>*#`).
+- **Comment settings** — `commentstring` and `comments` configured for `;` line comments.
+
+This is a pure Vimscript plugin — no external dependencies, works in both Vim and Neovim.
 
 ## Installation
+
+Because this repository uses the standard plugin layout (`ftdetect/`, `ftplugin/`, `syntax/` at the root), no runtimepath override is needed — install it like any other plugin.
 
 ### vim-plug
 
 ```vim
-Plug 'sema-lisp/sema.vim', { 'rtp': 'editors/vim' }
+Plug 'sema-lisp/sema.vim'
 ```
 
 ### lazy.nvim
 
 ```lua
-{
-  "sema-lisp/sema.vim",
-  config = function(plugin)
-    vim.opt.rtp:append(plugin.dir .. "/editors/vim")
-  end,
-}
+{ "sema-lisp/sema.vim" }
 ```
 
-### Pathogen
+### packer.nvim
+
+```lua
+use "sema-lisp/sema.vim"
+```
+
+### Native packages (`:packadd` / Vim 8+ & Neovim)
 
 ```bash
-cd ~/.vim/bundle
+git clone https://github.com/sema-lisp/sema.vim.git \
+  ~/.vim/pack/plugins/start/sema.vim
+# Neovim:
+git clone https://github.com/sema-lisp/sema.vim.git \
+  ~/.local/share/nvim/site/pack/plugins/start/sema.vim
+```
+
+### Manual
+
+Copy the directories into your Vim (`~/.vim`) or Neovim (`~/.config/nvim`) config:
+
+```bash
 git clone https://github.com/sema-lisp/sema.vim.git
-# Then add to your vimrc:
-# set runtimepath+=~/.vim/bundle/sema/editors/vim
+cp -r sema.vim/{ftdetect,ftplugin,syntax} ~/.vim/
 ```
 
-Or create a symlink so Pathogen picks it up directly:
+## Requirements
 
-```bash
-ln -s /path/to/sema/editors/vim ~/.vim/bundle/sema-vim
-```
+- **Vim 7+ or Neovim** — the plugin is pure Vimscript with no runtime dependencies.
+- The [`sema`](https://sema-lang.com) binary is only needed to *run* Sema code, not for editing. Install it from the [Sema project](https://github.com/HelgeSverre/sema).
 
-### Manual (Vim)
+## LSP Support (optional)
 
-Copy the directories into your Vim config:
-
-```bash
-mkdir -p ~/.vim/syntax ~/.vim/ftdetect ~/.vim/ftplugin
-cp editors/vim/syntax/sema.vim   ~/.vim/syntax/
-cp editors/vim/ftdetect/sema.vim ~/.vim/ftdetect/
-cp editors/vim/ftplugin/sema.vim ~/.vim/ftplugin/
-```
-
-### Manual (Neovim)
-
-```bash
-mkdir -p ~/.config/nvim/syntax ~/.config/nvim/ftdetect ~/.config/nvim/ftplugin
-cp editors/vim/syntax/sema.vim   ~/.config/nvim/syntax/
-cp editors/vim/ftdetect/sema.vim ~/.config/nvim/ftdetect/
-cp editors/vim/ftplugin/sema.vim ~/.config/nvim/ftplugin/
-```
-
-### Nix / Home Manager
-
-Add the plugin directory to your `runtimepath`:
-
-```nix
-programs.neovim.extraConfig = ''
-  set runtimepath+=/path/to/sema/editors/vim
-'';
-```
-
-## Highlighting Groups
-
-| Group              | What it covers                                        |
-| ------------------ | ----------------------------------------------------- |
-| `semaSpecial`      | Special forms (`define`, `lambda`, `if`, `defagent`…) |
-| `semaBuiltin`      | Builtin functions (`map`, `llm/chat`, `file/read`…)   |
-| `semaThreading`    | Threading macros (`->`, `->>`, `as->`)                |
-| `semaKeyword`      | Keyword literals (`:model`, `:temperature`…)          |
-| `semaString`       | String literals                                       |
-| `semaNumber`       | Integer and float literals                            |
-| `semaBoolean`      | `#t`, `#f`, `true`, `false`                           |
-| `semaConstant`     | `nil`                                                 |
-| `semaCharacter`    | Character literals (`#\a`, `#\space`…)                |
-| `semaComment`      | Line comments (`;`)                                   |
-| `semaTodo`         | TODO/FIXME/XXX/HACK/NOTE in comments                  |
-| `semaStringEscape` | Escape sequences in strings                           |
-| `semaQuote`        | Quote (`'`) and quasiquote (`` ` ``) prefixes         |
-| `semaUnquote`      | Unquote (`,`) and unquote-splicing (`,@`)             |
-| `semaParens`       | Parentheses, brackets, and braces                     |
-
-Override any group in your colorscheme to customise appearance.
-
-## LSP Support
-
-Sema ships with a built-in language server. Run it with `sema lsp`.
-
-**Available features:** completions, hover docs, go-to-definition, find references, rename, signature help, diagnostics, document symbols, and code lens (run expressions).
+Sema ships a built-in language server (`sema lsp`) providing completions, hover docs, go-to-definition, find references, rename, signature help, diagnostics, document symbols, and code lens. This plugin does not start it for you — wire it up with your LSP client of choice.
 
 ### nvim-lspconfig (Neovim built-in LSP)
-
-Add to your Neovim config:
 
 ```lua
 vim.api.nvim_create_autocmd('FileType', {
@@ -138,6 +97,34 @@ Add to `:CocConfig`:
 }
 ```
 
-### Inline Results (Advanced)
+The Sema LSP server also emits a custom `sema/evalResult` notification for inline evaluation results; displaying it requires a custom client handler (see the Sema documentation).
 
-The Sema LSP server emits a custom `sema/evalResult` notification for displaying inline evaluation results. This requires a custom handler in your client — see the Sema documentation for details.
+## Highlighting Groups
+
+| Group              | What it covers                                        |
+| ------------------ | ----------------------------------------------------- |
+| `semaSpecial`      | Special forms (`define`, `lambda`, `if`, `defagent`…) |
+| `semaBuiltin`      | Builtin functions (`map`, `llm/chat`, `file/read`…)   |
+| `semaThreading`    | Threading macros (`->`, `->>`, `as->`)                |
+| `semaOperator`     | Arithmetic/comparison operators (`+`, `-`, `<=`…)     |
+| `semaKeyword`      | Keyword literals (`:model`, `:temperature`…)          |
+| `semaString`       | String literals                                       |
+| `semaStringEscape` | Escape sequences in strings                           |
+| `semaNumber`       | Integer and float literals                            |
+| `semaBoolean`      | `#t`, `#f`, `true`, `false`                           |
+| `semaConstant`     | `nil`                                                 |
+| `semaCharacter`    | Character literals (`#\a`, `#\space`…)                |
+| `semaComment`      | Line comments (`;`)                                   |
+| `semaBlockComment` | Block comments (`#\| … \|#`)                          |
+| `semaTodo`         | TODO/FIXME/XXX/HACK/NOTE in comments                  |
+| `semaDefineVar`    | Names bound by `(define name …)` / `set!`             |
+| `semaDefineFun`    | Names bound by `(define (f …))`, `defun`, `defmacro`… |
+| `semaQuote`        | Quote (`'`) and quasiquote (`` ` ``) prefixes         |
+| `semaUnquote`      | Unquote (`,`) and unquote-splicing (`,@`)             |
+| `semaParens`       | Parentheses, brackets, and braces                     |
+
+Override any group in your colorscheme to customise appearance.
+
+## License
+
+MIT
