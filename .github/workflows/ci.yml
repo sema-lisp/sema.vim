@@ -13,10 +13,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          # vint imports the legacy `pkg_resources`, which setuptools 81 removed.
+          # Pin Python 3.12 (its stdlib still supports the old setuptools) and an
+          # older setuptools that still ships pkg_resources.
+          python-version: "3.12"
       - name: Install vim-vint
-        # vint imports pkg_resources, which Python 3.12+ no longer bundles
-        # (setuptools was dropped from the default install); add it explicitly.
-        run: pip install setuptools vim-vint
+        run: pip install "setuptools<81" vim-vint
       - name: Lint Vimscript
         run: vint ftdetect ftplugin syntax
