@@ -14,16 +14,7 @@
 
 Vim and Neovim support for Sema: syntax highlighting, filetype detection, and Lisp-aware editor settings for `.sema` files.
 
-## Features
-
-- **Filetype detection** — `.sema` files are automatically detected as `sema`.
-- **Syntax highlighting** — special forms, builtins (including LLM/agent primitives like `llm/chat`, `agent/run`, `defagent`, `deftool`), threading macros (`->`, `->>`, `as->`), keyword literals, strings with escapes, numbers, booleans, character literals, quoting/unquoting, line (`;`) and block (`#| … |#`) comments, and definition-name highlighting.
-- **Lisp-aware editing** — `lisp` mode with a curated `lispwords` list (including Sema forms such as `defagent`, `deftool`, `with-budget`), 2-space indentation, and `iskeyword` extended for Sema identifiers (`!?/-<>*#`).
-- **Comment settings** — `commentstring` and `comments` configured for `;` line comments.
-
-This is a pure Vimscript plugin — no external dependencies, works in both Vim and Neovim.
-
-## Installation
+## Install
 
 Because this repository uses the standard plugin layout (`ftdetect/`, `ftplugin/`, `syntax/` at the root), no runtimepath override is needed — install it like any other plugin.
 
@@ -63,6 +54,15 @@ Copy the directories into your Vim (`~/.vim`) or Neovim (`~/.config/nvim`) confi
 git clone https://github.com/sema-lisp/sema.vim.git
 cp -r sema.vim/{ftdetect,ftplugin,syntax} ~/.vim/
 ```
+
+## Features
+
+- **Filetype detection** — `.sema` files are automatically detected as `sema`.
+- **Syntax highlighting** — special forms, builtins (including LLM/agent primitives like `llm/chat`, `agent/run`, `defagent`, `deftool`), threading macros (`->`, `->>`, `as->`), keyword literals, strings with escapes, numbers, booleans, character literals, quoting/unquoting, line (`;`) and block (`#| … |#`) comments, and definition-name highlighting.
+- **Lisp-aware editing** — `lisp` mode with a curated `lispwords` list (including Sema forms such as `defagent`, `deftool`, `with-budget`), 2-space indentation, and `iskeyword` extended for Sema identifiers (`!?/-<>*#`).
+- **Comment settings** — `commentstring` and `comments` configured for `;` line comments.
+
+This is a pure Vimscript plugin — no external dependencies, works in both Vim and Neovim.
 
 ## Requirements
 
