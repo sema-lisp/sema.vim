@@ -10,7 +10,7 @@ jobs:
     name: vint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v5
         with:
           # vint imports the legacy `pkg_resources`, which setuptools 81 removed.
