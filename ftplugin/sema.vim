@@ -6,8 +6,10 @@ let b:did_ftplugin = 1
 setlocal commentstring=;\ %s
 setlocal comments=:;
 setlocal lisp
-setlocal lispwords=define,defun,lambda,fn,if,cond,case,when,unless
-setlocal lispwords+=let,let*,letrec,begin,do
+setlocal lispwords=define,def,defun,defn,lambda,fn,if,cond,case,when,unless
+setlocal lispwords+=let,let*,letrec,begin,progn,do,while
+setlocal lispwords+=let-values,let*-values,define-values,define-syntax
+setlocal lispwords+=match,match*,defmulti,defmethod,async,await
 setlocal lispwords+=define-record-type,defmacro,defagent,deftool
 setlocal lispwords+=try,catch
 setlocal lispwords+=module

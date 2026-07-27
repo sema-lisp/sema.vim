@@ -43,8 +43,10 @@ syn match semaKeyword /\v:[a-zA-Z0-9_/!?\-><*]+/
 
 " ---------- Special Forms -----------------------------------------------
 
-syn keyword semaSpecial define defun lambda fn if cond case when unless
-syn keyword semaSpecial let let* letrec begin do and or
+syn keyword semaSpecial define def defun defn lambda fn if cond case when unless
+syn keyword semaSpecial let let* letrec begin progn do while and or
+syn keyword semaSpecial let-values let*-values define-values define-syntax
+syn keyword semaSpecial match match* defmulti defmethod async await
 syn keyword semaSpecial set! quote quasiquote unquote unquote-splicing
 syn keyword semaSpecial define-record-type defmacro defagent deftool
 syn keyword semaSpecial try catch throw
@@ -55,13 +57,13 @@ syn keyword semaSpecial prompt message
 " ---------- Definition Names --------------------------------------------
 
 " (define name ...) — simple variable
-syn match semaDefineVar /\v\(define\s+\zs[a-zA-Z!$%&*+\-./:<=>?@^~_][a-zA-Z0-9!$%&*+\-./:<=>?@^~_]*\ze[^(]/
+syn match semaDefineVar /\v\(%(define|def)\s+\zs[a-zA-Z!$%&*+\-./:<=>?@^~_][a-zA-Z0-9!$%&*+\-./:<=>?@^~_]*\ze[^(]/
 
 " (define (name ...) ...) — function definition
-syn match semaDefineFun /\v\(define\s+\(\zs[a-zA-Z!$%&*+\-./:<=>?@^~_][a-zA-Z0-9!$%&*+\-./:<=>?@^~_]*/
+syn match semaDefineFun /\v\(%(define|def)\s+\(\zs[a-zA-Z!$%&*+\-./:<=>?@^~_][a-zA-Z0-9!$%&*+\-./:<=>?@^~_]*/
 
 " (defun name ...) / (defmacro name ...) / (defagent name ...) / (deftool name ...)
-syn match semaDefineFun /\v\(%(defun|defmacro|defagent|deftool)\s+\zs[a-zA-Z!$%&*+\-./:<=>?@^~_][a-zA-Z0-9!$%&*+\-./:<=>?@^~_]*/
+syn match semaDefineFun /\v\(%(defun|defn|defmacro|defmulti|defmethod|defagent|deftool)\s+\zs[a-zA-Z!$%&*+\-./:<=>?@^~_][a-zA-Z0-9!$%&*+\-./:<=>?@^~_]*/
 
 " (set! name value)
 syn match semaSetTarget /\v\(set!\s+\zs[a-zA-Z!$%&*+\-./:<=>?@^~_][a-zA-Z0-9!$%&*+\-./:<=>?@^~_]*/
