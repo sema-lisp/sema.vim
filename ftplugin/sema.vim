@@ -11,6 +11,7 @@ setlocal lispwords+=let,let*,letrec,begin,progn,do,while
 setlocal lispwords+=let-values,let*-values,define-values,define-syntax
 setlocal lispwords+=match,match*,defmulti,defmethod,async,await
 setlocal lispwords+=define-record-type,defmacro,defagent,deftool
+setlocal lispwords+=defworkflow,defpolicy,policy/without
 setlocal lispwords+=try,catch
 setlocal lispwords+=module
 setlocal lispwords+=set!,throw,import,load,delay,force

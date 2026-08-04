@@ -48,7 +48,7 @@ syn keyword semaSpecial let let* letrec begin progn do while and or
 syn keyword semaSpecial let-values let*-values define-values define-syntax
 syn keyword semaSpecial match match* defmulti defmethod async await
 syn keyword semaSpecial set! quote quasiquote unquote unquote-splicing
-syn keyword semaSpecial define-record-type defmacro defagent deftool
+syn keyword semaSpecial define-record-type defmacro defagent deftool defworkflow defpolicy
 syn keyword semaSpecial try catch throw
 syn keyword semaSpecial import module export load
 syn keyword semaSpecial delay force eval macroexpand with-budget else
@@ -62,8 +62,8 @@ syn match semaDefineVar /\v\(%(define|def)\s+\zs[a-zA-Z!$%&*+\-./:<=>?@^~_][a-zA
 " (define (name ...) ...) — function definition
 syn match semaDefineFun /\v\(%(define|def)\s+\(\zs[a-zA-Z!$%&*+\-./:<=>?@^~_][a-zA-Z0-9!$%&*+\-./:<=>?@^~_]*/
 
-" (defun name ...) / (defmacro name ...) / (defagent name ...) / (deftool name ...)
-syn match semaDefineFun /\v\(%(defun|defn|defmacro|defmulti|defmethod|defagent|deftool)\s+\zs[a-zA-Z!$%&*+\-./:<=>?@^~_][a-zA-Z0-9!$%&*+\-./:<=>?@^~_]*/
+" Named definition forms
+syn match semaDefineFun /\v\(%(defun|defn|defmacro|defmulti|defmethod|defagent|deftool|defworkflow|defpolicy)\s+\zs[a-zA-Z!$%&*+\-./:<=>?@^~_][a-zA-Z0-9!$%&*+\-./:<=>?@^~_]*/
 
 " (set! name value)
 syn match semaSetTarget /\v\(set!\s+\zs[a-zA-Z!$%&*+\-./:<=>?@^~_][a-zA-Z0-9!$%&*+\-./:<=>?@^~_]*/
@@ -140,6 +140,7 @@ syn match semaBuiltin /\v<embedding\/ref>/
 syn match semaBuiltin /\v<tool\/name>/
 syn match semaBuiltin /\v<tool\/description>/
 syn match semaBuiltin /\v<tool\/parameters>/
+syn match semaBuiltin /\v<tool\/policy-subjects>/
 
 " I/O
 syn keyword semaBuiltin display print println newline format read
@@ -442,6 +443,25 @@ syn match semaBuiltin /\v<sys\/temp-dir>/
 syn match semaBuiltin /\v<sys\/tty>/
 syn match semaBuiltin /\v<sys\/user>/
 syn match semaBuiltin /\v<sys\/which>/
+
+" Workflow and policy forms
+syn keyword semaBuiltin approval checkpoint parallel phase pipeline step
+syn match semaBuiltin /\v<parallel-settled>/
+syn match semaBuiltin /\v<pipeline-settled>/
+syn match semaBuiltin /\v<policy\/without>/
+syn match semaBuiltin /\v<settled-partition>/
+syn match semaBuiltin /\v<settled\/err\?>/
+syn match semaBuiltin /\v<settled\/ok\?>/
+syn match semaBuiltin /\v<workflow\/approval>/
+syn match semaBuiltin /\v<workflow\/check>/
+syn match semaBuiltin /\v<workflow\/checkpoint>/
+syn match semaBuiltin /\v<workflow\/phase>/
+syn match semaBuiltin /\v<workflow\/policy-without>/
+syn match semaBuiltin /\v<workflow\/run>/
+syn match semaBuiltin /\v<workflow\/run-form>/
+syn match semaBuiltin /\v<workflow\/step>/
+syn match semaBuiltin /\v<workflow\/tool-call>/
+syn match semaBuiltin /\v<workflow\/tool-result>/
 
 " Terminal functions
 syn match semaBuiltin /\v<term\/style>/
