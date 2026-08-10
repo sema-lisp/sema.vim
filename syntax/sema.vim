@@ -18,6 +18,7 @@ syn keyword semaTodo TODO FIXME XXX HACK NOTE contained
 
 " ---------- Strings & Characters ----------------------------------------
 
+syn region semaRegex start=/#"/ skip=/\\./ end=/"/
 syn region semaString start=/"/ skip=/\\./ end=/"/ contains=semaStringEscape
 syn match semaStringEscape /\\./ contained
 
@@ -496,6 +497,7 @@ hi def link semaComment Comment
 hi def link semaBlockComment Comment
 hi def link semaTodo Todo
 hi def link semaString String
+hi def link semaRegex String
 hi def link semaStringEscape SpecialChar
 hi def link semaNumber Number
 hi def link semaBoolean Boolean
