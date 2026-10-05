@@ -16,12 +16,14 @@ setlocal lispwords+=try,catch
 setlocal lispwords+=module
 setlocal lispwords+=set!,throw,import,load,delay,force
 setlocal lispwords+=prompt,message
-setlocal lispwords+=with-budget
+setlocal lispwords+=guard,when-let,if-let,with-stream,with-open,with-retry
+setlocal lispwords+=with-span,with-session,llm/with-budget
+setlocal lispwords+=io/with-raw-mode,term/with-alt-screen,term/with-mouse
 setlocal tabstop=2
 setlocal shiftwidth=2
 setlocal softtabstop=2
 setlocal expandtab
-setlocal iskeyword+=!,?,/,-,>,*,<,#
+setlocal iskeyword+=33,63,47,45,62,42,60,35,43,61,38,37,94,126,46
 
 let b:undo_ftplugin = 'setlocal commentstring< comments< lisp< lispwords<'
       \ . ' tabstop< shiftwidth< softtabstop< expandtab< iskeyword<'
