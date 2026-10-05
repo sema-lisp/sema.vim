@@ -23,3 +23,5 @@ jobs:
         run: vint ftdetect ftplugin syntax
       - name: Test filetype behavior
         run: vim -Nu NONE -i NONE -n -es -S tests/ftplugin_test.vim
+      - name: Test regex highlighting
+        run: vim -Nu NONE -n -es -S tests/regex_syntax.vim
