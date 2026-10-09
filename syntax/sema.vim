@@ -13,7 +13,6 @@ syn match semaParens /[(){}\[\]]/
 " ---------- Comments ----------------------------------------------------
 
 syn match semaComment /;.*$/ contains=semaTodo
-syn region semaBlockComment start=/#|/ end=/|#/ contains=semaBlockComment,semaTodo
 syn keyword semaTodo TODO FIXME XXX HACK NOTE contained
 
 " ---------- Strings & Characters ----------------------------------------
@@ -33,8 +32,7 @@ syn match semaNumber /\v%(^|[[:space:](\[{])\zs%(#[eEiI]#[bB]|#[bB]#[eEiI]|#[bB]
 
 " ---------- Booleans & Constants ----------------------------------------
 
-syn match semaBoolean /\v<#[tf]>/
-syn keyword semaBoolean true false
+syn keyword semaBoolean #t #f #true #false true false
 syn keyword semaConstant nil
 
 " ---------- Character Literals ------------------------------------------
@@ -49,6 +47,8 @@ syn match semaKeyword /\v:[a-zA-Z0-9_/!?\-><*]+/
 " ---------- Special Forms -----------------------------------------------
 
 syn keyword semaSpecial define def defun defn lambda fn if cond case when unless
+syn keyword semaSpecial term/with-bracketed-paste term/with-focus-events term/with-kitty-keys
+syn keyword semaSpecial parameterize dotimes for-range
 syn keyword semaSpecial let let* letrec begin progn do while and or
 syn keyword semaSpecial let-values let*-values define-values define-syntax
 syn keyword semaSpecial match match* defmulti defmethod async await
@@ -82,10 +82,10 @@ syn match semaThreading /\v%(^|[( \t])\zs(-\>|-\>\>|as-\>)\ze%([) \t\n]|$)/
 
 " ---------- Operators ---------------------------------------------------
 
-syn match semaOperator /\v%(^|[( \t\[{])\zs[+\-*/%]\ze%([) \t\]}\n]|$)/
+syn match semaOperator /\v%(^|[( \t\[{])\zs[+\-*/]\ze%([) \t\]}\n]|$)/
 syn match semaOperator /\v%(^|[( \t\[{])\zs[<>=]\ze%([) \t\]}\n]|$)/
 syn match semaOperator /\v%(^|[( \t\[{])\zs[<>]\=\ze%([) \t\]}\n]|$)/
-syn match semaOperator /\v<eqv\?>/
+syn keyword semaOperator eq? equal?
 
 " ---------- Builtin Functions -------------------------------------------
 " Generated from crates/sema-docs/builtin_docs.generated.json.
@@ -243,7 +243,6 @@ syn match semaUnquote /,@\?/
 " ---------- Highlight Links ---------------------------------------------
 
 hi def link semaComment Comment
-hi def link semaBlockComment Comment
 hi def link semaTodo Todo
 hi def link semaString String
 hi def link semaRegex String
